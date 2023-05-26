@@ -91,7 +91,8 @@ ID2CLASS = {
 
 }
 
-TASKS = ['EMO','GS', 'MTGInstrument', 'MTGGenre', 'MTGTop50', 'MTGMood', 'NSynthI', 'NSynthP', 'VocalSetS', 'VocalSetT']
+TASKS = ['GS', 'MTGInstrument', 'MTGGenre', 'MTGTop50', 'MTGMood', 'NSynthI', 'NSynthP', 'VocalSetS', 'VocalSetT','EMO',]
+Regression_TASKS = ['EMO']
 head_dir = './Prediction_Head/best-layer-MERT-v1-95M'
 for task in TASKS:
     print('loading', task)
