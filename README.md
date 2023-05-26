@@ -1,10 +1,10 @@
 ---
-title: Music Descriptor
-emoji: 📚
-colorFrom: yellow
-colorTo: green
+title: MusicTagging
+emoji: 💻
+colorFrom: gray
+colorTo: red
 sdk: gradio
-sdk_version: 3.32.0
+sdk_version: 3.29.0
 app_file: app.py
 pinned: false
 license: mit
