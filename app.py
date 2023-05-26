@@ -92,14 +92,14 @@ ID2CLASS = {
 }
 
 TASKS = ['EMO','GS', 'MTGInstrument', 'MTGGenre', 'MTGTop50', 'MTGMood', 'NSynthI', 'NSynthP', 'VocalSetS', 'VocalSetT']
-head_dir = '/home/chenghua/nanshen/Yizhi/MERT_Universal/Prediction_Head/best-layer-MERT-v1-95M'
+head_dir = './Prediction_Head/best-layer-MERT-v1-95M'
 for task in TASKS:
     print('loading', task)
     with open(os.path.join(head_dir,f'{task}.id2class.json'), 'r') as f:
         ID2CLASS[task]=json.load(f)
     num_class = len(ID2CLASS[task].keys())
     CLASSIFIERS[task] = MLPProberBase(d=768, layer=MERT_BEST_LAYER_IDX[task], num_outputs=num_class)
-    CLASSIFIERS[task].load_state_dict(torch.load(f'/home/chenghua/nanshen/Yizhi/MERT_Universal/Prediction_Head/best-layer-MERT-v1-95M/{task}.ckpt')['state_dict'])
+    CLASSIFIERS[task].load_state_dict(torch.load(f'{head_dir}/{task}.ckpt')['state_dict'])
     CLASSIFIERS[task].to(device)
 
 model.to(device)
