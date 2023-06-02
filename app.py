@@ -48,13 +48,13 @@ audio_examples = [
     # ["input/example-2.wav"],
 ]
 
-df_init = pd.DataFrame(columns=['Task', 'Top 1', 'Top 2', 'Top 3'])
+df_init = pd.DataFrame(columns=['Task', 'Top 1', 'Top 2', 'Top 3', 'Top 4', 'Top 5'])
 transcription_df = gr.DataFrame(value=df_init, label="Output Dataframe", row_count=(
     0, "dynamic"), max_rows=30, wrap=True, overflow_row_behaviour='paginate')
 # outputs = [gr.components.Textbox()]
 outputs = transcription_df
 
-df_init_live = pd.DataFrame(columns=['Task', 'Top 1', 'Top 2', 'Top 3'])
+df_init_live = pd.DataFrame(columns=['Task', 'Top 1', 'Top 2', 'Top 3', 'Top 4', 'Top 5'])
 transcription_df_live = gr.DataFrame(value=df_init_live, label="Output Dataframe", row_count=(
     0, "dynamic"), max_rows=30, wrap=True, overflow_row_behaviour='paginate')
 outputs_live = transcription_df_live
@@ -143,7 +143,7 @@ def model_infernce(inputs):
     all_layer_hidden_states = all_layer_hidden_states.mean(dim=2)
 
     task_output_texts = ""
-    df = pd.DataFrame(columns=['Task', 'Top 1', 'Top 2', 'Top 3'])
+    df = pd.DataFrame(columns=['Task', 'Top 1', 'Top 2', 'Top 3', 'Top 4', 'Top 5'])
     df_objects = []
 
     for task in TASKS:
@@ -159,9 +159,9 @@ def model_infernce(inputs):
         # print(sorted_prob)
         # print(sorted_prob.shape)
         
-        top_n_show = 3 if num_class >= 3 else num_class
-        task_output_texts = task_output_texts + f"TASK {task} output:\n" + "\n".join([str(ID2CLASS[task][str(sorted_idx[idx].item())])+f', probability: {sorted_prob[idx].item():.2%}' for idx in range(top_n_show)]) + '\n'
-        task_output_texts = task_output_texts + '----------------------\n'
+        top_n_show = 5 if num_class >= 5 else num_class
+        # task_output_texts = task_output_texts + f"TASK {task} output:\n" + "\n".join([str(ID2CLASS[task][str(sorted_idx[idx].item())])+f', probability: {sorted_prob[idx].item():.2%}' for idx in range(top_n_show)]) + '\n'
+        # task_output_texts = task_output_texts + '----------------------\n'
 
         row_elements = [task]
         for idx in range(top_n_show):
@@ -174,10 +174,10 @@ def model_infernce(inputs):
             output_prob = f' {sorted_prob[idx].item():.2%}'
             row_elements.append(output_class_name+output_prob)
         # fill empty elment
-        for _ in range(4 - len(row_elements)):
+        for _ in range(5+1 - len(row_elements)):
             row_elements.append(' ')
         df_objects.append(row_elements)
-    df = pd.DataFrame(df_objects, columns=['Task', 'Top 1', 'Top 2', 'Top 3'])
+    df = pd.DataFrame(df_objects, columns=['Task', 'Top 1', 'Top 2', 'Top 3', 'Top 4', 'Top 5'])
     return df
     
 def convert_audio(inputs, microphone):
