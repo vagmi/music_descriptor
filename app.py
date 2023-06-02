@@ -52,12 +52,12 @@ df_init = pd.DataFrame(columns=['Task', 'Top 1', 'Top 2', 'Top 3'])
 transcription_df = gr.DataFrame(value=df_init, label="Output Dataframe", row_count=(
     0, "dynamic"), max_rows=30, wrap=True, overflow_row_behaviour='paginate')
 # outputs = [gr.components.Textbox()]
-outputs = [ transcription_df]
+outputs = transcription_df
 
 df_init_live = pd.DataFrame(columns=['Task', 'Top 1', 'Top 2', 'Top 3'])
 transcription_df_live = gr.DataFrame(value=df_init_live, label="Output Dataframe", row_count=(
     0, "dynamic"), max_rows=30, wrap=True, overflow_row_behaviour='paginate')
-outputs_live = [transcription_df_live]
+outputs_live = transcription_df_live
 
 # Load the model and the corresponding preprocessor config
 # model = AutoModel.from_pretrained("m-a-p/MERT-v0-public", trust_remote_code=True)
