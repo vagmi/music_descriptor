@@ -42,7 +42,18 @@ live_inputs = [
 
 title = "One Model for All Music Understanding Tasks"
 description = "An example of using the [MERT-v1-95M](https://huggingface.co/m-a-p/MERT-v1-95M) model as backbone to conduct multiple music understanding tasks with the universal represenation."
-article = "The tasks include EMO, GS, MTGInstrument, MTGGenre, MTGTop50, MTGMood, NSynthI, NSynthP, VocalSetS, VocalSetT. \n\n More models can be referred at the [map organization page](https://huggingface.co/m-a-p)."
+# article = "The tasks include EMO, GS, MTGInstrument, MTGGenre, MTGTop50, MTGMood, NSynthI, NSynthP, VocalSetS, VocalSetT. \n\n More models can be referred at the [map organization page](https://huggingface.co/m-a-p)."
+with open('./README.md', 'r') as f:
+    # skip the header
+    header_count = 0
+    for line in f:
+        if '---' in line:
+            header_count += 1
+        if header_count >= 2:
+            break
+    # read the rest conent
+    article = f.read()
+    
 audio_examples = [
     # ["input/example-1.wav"],
     # ["input/example-2.wav"],
